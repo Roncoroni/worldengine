@@ -21,7 +21,7 @@ config = {
     'download_url': 'https://github.com/Mindwerks/worldengine/releases',
     'version': __version__,
     'packages': ['worldengine', 'worldengine.cli', 'worldengine.simulations',
-                 'worldengine.protobuf', 'worldengine.imex'],
+                 'worldengine.protobuf', 'worldengine.imex' 'worldengine.model'],
     'entry_points': {
         'console_scripts': ['worldengine=worldengine.cli.main:main'],
     },
