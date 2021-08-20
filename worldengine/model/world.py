@@ -845,7 +845,7 @@ class World(object):
 
     @property
     def watermap(self):
-        return self.layers['watermap'].data
+        return self.layers['watermap']
 
     @watermap.setter
     def watermap(self, val):
