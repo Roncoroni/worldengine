@@ -639,24 +639,24 @@ class World(object):
 
     def contains_creek(self, pos):
         x, y = pos
-        v = self.watermap['data'][y, x]
-        return self.watermap['thresholds']['creek'] <= v < \
-            self.watermap['thresholds']['river']
+        v = self.watermap.data[y, x]
+        return self.watermap.thresholds['creek'] <= v < \
+            self.watermap.thresholds['river']
 
     def contains_river(self, pos):
         x, y = pos
-        v = self.watermap['data'][y, x]
-        return self.watermap['thresholds']['river'] <= v < \
-            self.watermap['thresholds']['main river']
+        v = self.watermap.data[y, x]
+        return self.watermap.thresholds['river'] <= v < \
+            self.watermap.thresholds['main river']
 
     def contains_main_river(self, pos):
         x, y = pos
-        v = self.watermap['data'][y, x]
-        return v >= self.watermap['thresholds']['main river']
+        v = self.watermap.data[y, x]
+        return v >= self.watermap.thresholds['main river']
 
     def watermap_at(self, pos):
         x, y = pos
-        return self.watermap['data'][y, x]
+        return self.watermap.data[y, x]
 
     #
     # Biome
