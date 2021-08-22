@@ -11,7 +11,7 @@ class IcecapSimulation(object):
 
     @staticmethod
     def is_applicable(world):
-        return world.has_ocean() and world.has_temperature()
+        return world.has_ocean() and world.has_temperature() and (not world.has_icecap())
 
     def execute(self, world, seed):
         world.icecap = self._calculate(world, seed)

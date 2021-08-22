@@ -23,6 +23,7 @@ rewritten:
 
 import numpy
 import png
+import io
 #Documentation PyPNG: https://pythonhosted.org/pypng/png.html
 #Documentation PurePNG: http://purepng.readthedocs.org/en/latest/
 #The latter one is a fork of the former one. It is yet to be seen which one is better.
@@ -172,6 +173,16 @@ class PNGWriter(object):
                 else:  # only values 1..4 are allowed
                     color = [color, color, color, 255]
         self.array[y, x] = color
+
+    def to_bytes(self):
+        image_bytes = io.BytesIO()
+        if self.img is None:
+            self.img = png.Writer(width=self.width, height=self.height,
+                                  greyscale=self.grayscale, bitdepth=self.channel_bitdepth,  # British spelling
+                                  alpha=self.has_alpha, palette=self.palette)
+        self.img.write_array(image_bytes, self.prepare_array(self.array))
+        image_bytes.seek(0)
+        return image_bytes.read()
 
     def complete(self, filename=None):
         if filename is None:

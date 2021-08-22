@@ -736,7 +736,14 @@ def draw_scatter_plot(world, size, target):
                 ny = (size - 1) * ((p - min_humidity) / humidity_delta)
                     
                 target.set_pixel(int(nx), (size - 1) - int(ny), (r, 128, b, 255))
-    
+
+
+def draw_icecaps(world, target):
+    icecap_data = world.layers['icecap'].data
+    for y in range(world.height):
+        for x in range(world.width):
+            target.set_pixel(x, y, (icecap_data[y, x], icecap_data[y, x], icecap_data[y, x], 255))
+
 
 # -------------
 # Draw on files

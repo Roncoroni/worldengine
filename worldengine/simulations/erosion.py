@@ -33,7 +33,7 @@ class ErosionSimulation(object):
         self.wrap = True
 
     def is_applicable(self, world):
-        return world.has_precipitations()
+        return world.has_precipitations() and (not (world.has_rivermap() or world.has_lakemap()))
 
     def execute(self, world, seed):
         water_flow = numpy.zeros((world.height, world.width))
