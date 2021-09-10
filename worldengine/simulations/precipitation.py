@@ -10,7 +10,9 @@ class PrecipitationSimulation(object):
 
     @staticmethod
     def is_applicable(world):
-        return not world.has_precipitations()
+        return (
+            (not world.has_precipitations()) and world.has_temperature()
+        )
 
     def execute(self, world, seed):
         if get_verbose():
