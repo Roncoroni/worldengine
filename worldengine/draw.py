@@ -248,7 +248,7 @@ def get_normalized_elevation_array(world):
     max_elev_sea = mask.max()
     elev_delta_sea = max_elev_sea - min_elev_sea
 
-    c = numpy.empty(e.shape, dtype=numpy.float)
+    c = numpy.empty(e.shape, dtype=float)
     c[numpy.invert(ocean)] = (e[numpy.invert(ocean)] - min_elev_land) * 127 / elev_delta_land + 128
     c[ocean] = (e[ocean] - min_elev_sea) * 127 / elev_delta_sea
     c = numpy.rint(c).astype(dtype=numpy.int32)  # proper rounding
@@ -325,7 +325,7 @@ def draw_simple_elevation(world, sea_level, target):
         on disk or a canvas part of a GUI)
     """
     e = world.layers['elevation'].data
-    c = numpy.empty(e.shape, dtype=numpy.float)
+    c = numpy.empty(e.shape, dtype=float)
 
     has_ocean = not (sea_level is None or world.layers['ocean'].data is None or not world.layers['ocean'].data.any())  # or 'not any ocean'
     mask_land = numpy.ma.array(e, mask=world.layers['ocean'].data if has_ocean else False)  # only land
@@ -533,12 +533,12 @@ def draw_precipitation(world, target, black_and_white=False):
     height = world.height
 
     if black_and_white:
-        low = world.precipitation['data'].min()
-        high = world.precipitation['data'].max()
+        low = world.precipitation.min()
+        high = world.precipitation.max()
         floor = 0
         ceiling = 255  # could be changed into 16 Bit grayscale easily
 
-        colors = numpy.interp(world.precipitation['data'], [low, high], [floor, ceiling])
+        colors = numpy.interp(world.precipitation.data, [low, high], [floor, ceiling])
         colors = numpy.rint(colors).astype(dtype=numpy.int32)  # proper rounding
         for y in range(height):
             for x in range(width):
@@ -588,7 +588,7 @@ def draw_temperature_levels(world, target, black_and_white=False):
         floor = 0
         ceiling = 255  # could be changed into 16 Bit grayscale easily
 
-        colors = numpy.interp(world.temperature['data'], [low, high], [floor, ceiling])
+        colors = numpy.interp(world.temperature.data, [low, high], [floor, ceiling])
         colors = numpy.rint(colors).astype(dtype=numpy.int32)  # proper rounding
         for y in range(height):
             for x in range(width):
